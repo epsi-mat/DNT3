@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo "Etape de build avec Github Auto"
                 cd /home/groupea/Documents/DNT3
-                docker build -t dnt3/nodeapp:v1
+                docker build -t dnt3/nodeapp:v1 .
             }
         }
         stage('Test') {
