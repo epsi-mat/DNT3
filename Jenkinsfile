@@ -5,6 +5,8 @@ pipeline {
             steps {
                 echo "Etape de build avec Github Auto"
                 cd /home/epsi/Bureau/DNT3
+                git pull
+                npm install --only=prod
                 pm2 restart bin/www
             }
         }
