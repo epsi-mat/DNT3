@@ -1,6 +1,6 @@
 pipeline {
     agent any
-        stages {
+    stages {
         stage('Build') {
             steps {
                 echo "Etape de build avec Github Auto"
@@ -17,7 +17,6 @@ pipeline {
           steps {
             echo "Etape de déploiement"
             cd /home/epsi/Bureau/DNT3
-            npm install --only=prod
             pm2 restart bin/www
           }
         }
