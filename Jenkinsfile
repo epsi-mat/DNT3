@@ -5,11 +5,12 @@ pipeline {
             steps {
                 echo "Etape de build avec Github Auto"
                 sh '''
-                    cd /var/www/dnt3/DNT3
-                    pm2 stop /var/www/dnt3/DNT3/bin/www
+                    ssh dnt3@10.0.2.15
+                    cd ~/DNT3
+                    pm2 stop bin/www
                     git pull
-                    npm install
-                    pm2 start /var/www/dnt3/DNT3/bin/www
+                    npm install --production
+                    pm2 start bin/www
                 '''
             }
         }
@@ -21,7 +22,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Etape de déploiement"
-                sh 'pm2 restart /var/www/dnt3/DNT3/bin/www'
             }
         }
     }  
