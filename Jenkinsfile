@@ -9,6 +9,7 @@ pipeline {
                     pm2 stop /var/www/dnt3/DNT3/bin/www
                     git pull
                     npm install
+                    pm2 start /var/www/dnt3/DNT3/bin/www
                 '''
             }
         }
@@ -20,7 +21,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Etape de déploiement"
-                sh 'p2 start /var/www/dnt3/DNT3/bin/www'
+                sh 'pm2 restart /var/www/dnt3/DNT3/bin/www'
             }
         }
     }  
