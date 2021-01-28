@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Etape de build avec Github Autoo"
+                echo "Etape de build avec Github Auto"
             }
         }
         stage('Test') {
