@@ -17,7 +17,8 @@ pipeline {
           steps {
             echo "Etape de déploiement"
             cd /home/epsi/Bureau/DNT3
-            pm2 restart bin/www
+            npm install
+            pm2 start bin/www
           }
         }
     }
