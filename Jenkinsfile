@@ -5,6 +5,7 @@ pipeline {
             steps {
                 echo "Etape de build avec Github Auto"
                 cd /home/epsi/Bureau/DNT3
+                pm2 stop bin/www
                 git pull
             }
         }
