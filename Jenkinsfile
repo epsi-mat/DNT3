@@ -4,10 +4,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Etape de build avec Github Auto"
-                cd /var/www/dnt3/DNT3
-                pm2 stop /var/www/dnt3/DNT3/bin/www
-                git pull
-                npm install
+                sh '''
+                    cd /var/www/dnt3/DNT3
+                    pm2 stop /var/www/dnt3/DNT3/bin/www
+                    git pull
+                    npm install
+                '''
             }
         }
         stage('Test') {
@@ -18,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Etape de déploiement"
-                p2 start /var/www/dnt3/DNT3/bin/www
+                sh 'p2 start /var/www/dnt3/DNT3/bin/www'
             }
         }
     }  
