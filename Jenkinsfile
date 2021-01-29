@@ -3,12 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Etape de build avec Github Auto"
-                sh '''
-                    ssh dnt3@10.0.2.15
-                    cd /var/www/dnt3/DNT3
-                    npm install --production
-                '''
+                echo "Etape de build"
+                
             }
         }
         stage('Test') {
@@ -19,6 +15,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Etape de déploiement"
+                sh '/var/www/dnt3/DNT3/bin/deploy.sh'
             }
         }
     }  
