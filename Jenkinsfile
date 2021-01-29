@@ -6,11 +6,9 @@ pipeline {
                 echo "Etape de build avec Github Auto"
                 sh '''
                     ssh dnt3@10.0.2.15
-                    cd ~/DNT3
-                    pm2 stop bin/www
+                    cd /var/www/dnt3/DNT3
                     git pull
                     npm install --production
-                    pm2 start bin/www
                 '''
             }
         }
