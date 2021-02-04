@@ -11242,3 +11242,10 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+.logo_accueil {
+  width: 230px !important;
+}
+.sidebar-brand.d-flex.align-items-center.justify-content-center {
+  margin: 15px 0 15px 0 !important;
+}
