@@ -2,6 +2,7 @@ const dbConfig =  require("./db")
 const mysql = require("mysql2");
 
 let pool = mysql.createPool({
+    socketPath: dbConfig.SOCKET,
     host: dbConfig.HOST,
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
@@ -9,11 +10,11 @@ let pool = mysql.createPool({
 });
 
 const Commande = function(commande) {
-    this.nom = commande.nom
+    this.nom_produit = commande.nom_produit
     this.date_commande = commande.date_commande
     this.date_livraison = commande.date_livraison
     this.fournisseur = commande.fournisseur
-    this.prix = commande.prix
+    this.prix_produit = commande.prix_produit
 }
 
 Commande.getAll = result => {
