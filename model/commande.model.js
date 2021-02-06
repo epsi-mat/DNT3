@@ -2,11 +2,11 @@ const dbConfig =  require("./db")
 const mysql = require("mysql2");
 
 let pool = mysql.createPool({
-    socketPath: dbConfig.SOCKET,
     host: dbConfig.HOST,
     user: dbConfig.USER,
     password: dbConfig.PASSWORD,
-    database: dbConfig.DB
+    database: dbConfig.DB,
+    port: dbConfig.PORT
 });
 
 const Commande = function(commande) {
