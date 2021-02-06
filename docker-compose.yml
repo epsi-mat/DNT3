@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  sonarqube:
+    build:
+      context: sonarqube/
+    ports:
+      - 9000:9000
+      - 9092:9092
+    container_name: sonarqube
+  jenkins:
+    build:
+      context: jenkins/
+    privileged: true
+    #user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - /home/jenkins:/home/jenkins
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - sonarqube
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_HOSTNAME=db
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+    ports:
+      - "80:3000"
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+    volumes:
+      - ./sqlscripts/:/docker-entrypoint-initdb.d
+      - dbdata:/data/db
+    networks:
+      - app-network
+      
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:
