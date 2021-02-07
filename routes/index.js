@@ -15,5 +15,9 @@ router.get('/register', function(req, res, next) {
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Connexion' });
 });
+
+router.get('/error', function(req, res, next) {
+  res.render('error', { title: 'Erreur 404 ' });
+});
 module.exports = router;
 
