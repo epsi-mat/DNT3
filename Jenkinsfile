@@ -1,16 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                echo "Etape de build"
-                
-            }
-        }
-        stage('Test') {
-            steps {
-                echo "Etape de test"
-            }
+        stage ('dumpDB') {
+            sh '''
+                ssh dnt3@10.0.2.15 <<EOF
+                 mysqldump --column-statistics=0 --user=epsi --password="epsimysql" --socket='/opt/lampp/var/mysql/mysql.sock' --databases epsi > /var/www/dnt3/`date +%Y-%m-%d-%H`-dump.sql
+                 exit
+                EOF
+            '''
         }
         stage('Deploy') {
             steps {
