@@ -261,6 +261,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Actions</th>
                                             <th>Produit</th>
                                             <th>Date de Commande</th>
                                             <th>Date de Livraison</th>
@@ -272,12 +273,17 @@
                                     <tbody>
                                     <% results.forEach(function(commande) { %>
                                         <tr>
+                                            <td><button class="btn-primary">Editer</button><button class="btn-primary">Supprimer</button></td>
                                             <td><%= commande.nom_produit %></td>
-                                            <td><%= commande.date_commande %></td>
-                                            <td><%= commande.date_livraison %></td>
-                                            <td><%= commande.fournisseur %></td>
+                                            <td><%= commande.date_commande.toLocaleDateString() %> </td>
+                                            <td><% if (commande.date_livraison !== null )
+                                            {%>
+                                                <%=commande.date_livraison.toLocaleDateString() %>
+                                            <%
+                                            }
+                                            %> </td>
                                             <td><%= commande.prix_produit %></td>
-                                            <td><button class="btn-primary">éditer</button></td>
+                                            <td><%= commande.fournisseur %></td>
                                         </tr>
                                     <% }); %>
                                     </tbody>
