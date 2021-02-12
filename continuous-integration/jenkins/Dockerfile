@@ -13,17 +13,11 @@ RUN add-apt-repository \
 RUN apt-get update  -qq \
     && apt-get install docker-ce=17.12.1~ce-0~debian -y
 
-RUN echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
-    && apt-key adv --keyserver https://keyserver.ubuntu.com:443 --recv-keys 93C4A3FD7BB9C367
-RUN apt-get update
-RUN curl -fsSL https://get.docker.com | bash - \
-    && curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose \
-    && chmod +x /usr/local/bin/docker-compose
-RUN usermod -aG docker jenkins
-USER jenkins
+RUN curl -L --fail https://github.com/docker/compose/releases/download/1.28.2/run.sh -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
 
 # Installing the plugins we need using the in-built install-plugins.sh script
-RUN /usr/local/bin/install-plugins.sh git matrix-auth workflow-aggregator docker-workflow blueocean credentials-binding
+RUN /usr/local/bin/install-plugins.sh git matrix-auth workflow-aggregator docker-workflow blueocean credentials-binding docker-plugin
 
 # Setting up environment variables for Jenkins admin user
 ENV JENKINS_USER admin

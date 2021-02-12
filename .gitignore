@@ -6,3 +6,4 @@ package-lock.json
 .idea/workspace.xml
 .scannerwork/report-task.txt
 .scannerwork/.sonar_lock
+.env
