@@ -9,3 +9,4 @@ module.exports = {
     DB: process.env.MYSQL_DATABASE,
     SOCKET: process.env.MYSQL_SOCKET
 };
+};
