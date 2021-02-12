@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-describe('Admin page Suite', () => {
+describe('Commande page Suite', () => {
   beforeAll(async () => {
     await page.goto('http://localhost:3000/');
   });

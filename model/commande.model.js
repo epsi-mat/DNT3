@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 let pool;
 if (process.env.NODE_ENV === 'production') {
     pool = mysql.createPool({
-        socketPath: dbConfig.HOST,
+        socketPath: dbConfig.SOCKET,
         user: dbConfig.USER,
         password: dbConfig.PASSWORD,
         database: dbConfig.DB,
