@@ -237,26 +237,26 @@
                                     <thead>
                                         <tr>
                                             <th>Produit</th>
+                                            <th>Fournisseur</th>
                                             <th>Date de Commande</th>
                                             <th>Date de Livraison</th>
-                                            <th>Prix HT </th>
-                                            <th>Prix</th>
+                                            <th>Prix unitaire HT</th>
                                             <th>Quantité</th>
-                                            <th>Fournisseur</th>
+                                            <th>Total TTC</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <% results.forEach(function(commande) { %>
                                         <tr>
-                                            <td><%= commande.nom_produit %></td>
+                                            <td><%= commande.produit %></td>
+                                            <td><%= commande.fournisseur %></td>
                                             <td><%= commande.date_commande.toLocaleDateString() %> </td>
                                             <td><%= commande.date_livraison !== null ? commande.date_livraison.toLocaleDateString():"" %> </td>
-                                            <td><%= commande.prix_produit %></td>
-                                            <td></td>
-                                            <td></td>
-                                           <td><%= commande.fournisseur %></td>
-                                           <td><button type="button" href='/commandes/edit' class="btn btn-warning">Editer</button>  <button type="button" class="btn btn-danger btn-supprimer">Supprimer</button></td>
+                                            <td><%= commande.prix_hors_taxe %></td>
+                                            <td><%= commande.quantite %></td>
+                                            <td><%= commande.prix %></td>
+                                           <td><a href='/commandes/edit' class="btn btn-warning">Editer</a>  <button type="button" class="btn btn-danger btn-supprimer">Supprimer</button></td>
                                         </tr>
                                     <% }); %>
                                     </tbody>

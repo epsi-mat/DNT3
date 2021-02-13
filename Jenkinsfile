@@ -9,11 +9,30 @@ pipeline {
                 EOF
             '''
         }
+        stage ('Unit test + Integration test') {
+        sh '''
+            ssh dnt3@10.0.2.15 <<EOF
+             cd cd /var/www/dnt3/DNT3-test
+             git pull
+             npm install
+             jest
+             exit
+            EOF
+        '''
+        }
         stage('Deploy') {
             steps {
                 echo "Etape de déploiement"
                 sh '/var/www/dnt3/DNT3/bin/deploy.sh'
             }
+        }
+        stage('Smoke test production') {
+        sh '''
+            ssh dnt3@10.0.2.15 <<EOF
+             jest test/smoke.test.js
+             exit
+            EOF
+        '''
         }
     }  
 }

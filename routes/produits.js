@@ -28,21 +28,18 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const Commande = function (commande) {
-  this.id_commande = commande.id_commande;
-  this.nom_produit = commande.nom_produit;
-  this.date_commande = commande.date_commande;
-  this.date_livraison = commande.date_livraison;
+const Produit = function (produit) {
+  this.nom_produit = produit.nom_produit;
+  this.fournisseur = produit.fournisseur;
+  this.prix_hors_taxe = produit.prix_hors_taxe;
+  this.tva = produit.tva;
 };
 
-Commande.getAll = (result) => {
-  pool.query(
-    'SELECT c.id_commande, c.date_commande, c.date_livraison, c.quantite, p.produit, p.prix_hors_taxe, p.tva, p.fournisseur FROM commande c INNER JOIN produit p ON c.id_produit = p.id_produit',
-    (err, res) => {
-      if (err) throw err;
-      result(null, res);
-    }
-  );
+Produit.getNomsProduits = (result) => {
+  pool.query('SELECT nom_produit FROM produit', (err, res) => {
+    if (err) throw err;
+    result(null, res);
+  });
 };
 
-module.exports = Commande;
+module.exports = Produit;
