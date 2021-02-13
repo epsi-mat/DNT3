@@ -229,30 +229,34 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <button class ="btn btn-success">Ajouter Produit </button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#commandeModal">Ajouter Produit </button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Actions</th>
                                             <th>Produit</th>
                                             <th>Date de Commande</th>
                                             <th>Date de Livraison</th>
                                             <th>Prix HT </th>
+                                            <th>Prix</th>
+                                            <th>Quantité</th>
                                             <th>Fournisseur</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <% results.forEach(function(commande) { %>
                                         <tr>
-                                            <td><a href='/commandes/edit' class ="btn btn-primary">Editer </a>  <button class="btn btn-danger">Supprimer</button></td>
                                             <td><%= commande.nom_produit %></td>
                                             <td><%= commande.date_commande.toLocaleDateString() %> </td>
                                             <td><%= commande.date_livraison !== null ? commande.date_livraison.toLocaleDateString():"" %> </td>
                                             <td><%= commande.prix_produit %></td>
-                                            <td><%= commande.fournisseur %></td>
+                                            <td></td>
+                                            <td></td>
+                                           <td><%= commande.fournisseur %></td>
+                                           <td><button type="button" href='/commandes/edit' class="btn btn-warning">Editer</button>  <button type="button" class="btn btn-danger btn-supprimer">Supprimer</button></td>
                                         </tr>
                                     <% }); %>
                                     </tbody>
@@ -308,6 +312,40 @@
         </div>
     </div>
 
+    <!-- Modal d'ajout de commande -->
+    <div class="modal fade" id="commandeModal" tabindex="-1" role="dialog" aria-labelledby="commandeModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="commandeModalLabel" style="text-align: right;">Commander</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="form-group">
+                        <label for="produit" class="form-label" style="text-align: center;">Sélectionner votre produit</label>
+                        <select class="form-control" id="produit">
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantite">Sélectionner la quantité</label>
+                        <input type="number" class="form-control" id="quantite" min="1" placeholder="Sélectionner la quantité">
+                    </div>
+                    <div class="btn-form-ajout" style="text-align: right;">
+                        <button type="submit" class="btn btn-success">Commander</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -324,6 +362,17 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(".btn-supprimer").click(function(){
+                let results = window.confirm('Voulez-vraiment supprimer la commande ?')
+                if(results){ 
+                    location.reload();
+                }
+            });
+        });
+    </script>
 
 </body>
 
