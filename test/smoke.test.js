@@ -8,18 +8,18 @@ describe('Smoke Test Production Suite', () => {
     await expect(page.title()).resolves.toMatch('PreudHomme');
   });
 
-  test('should Commandes page ', async () => {
+  test('should be Commandes page ', async () => {
     await page.goto(url + 'commandes');
     await expect(page.title()).resolves.toMatch('Commandes');
   });
 
-  test('should Connexion page ', async () => {
+  test('should be Connexion page ', async () => {
     await page.goto(url + 'login');
     await expect(page.title()).resolves.toMatch('Connexion');
   });
 
-  test('should Commandes page ', async () => {
+  test('should be Incription page ', async () => {
     await page.goto(url + 'register');
-    await expect(page.title()).resolves.toMatch('Commandes');
+    await expect(page.title()).resolves.toMatch('Inscription');
   });
 });

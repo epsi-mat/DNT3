@@ -19,7 +19,7 @@ pipeline {
                      rm -rf DNT3-test
                      git clone https://github.com/epsi-mat/DNT3.git DNT3-test
                      cd DNT3-test
-                     echo -e "NODE_ENV=production\n\nMYSQL_DATABASE=epsitest\nMYSQL_USER=epsi\nMYSQL_PASSWORD=epsimysql\nMYSQL_ROOT_PASSWORD=rootepsimysql123\nMYSQL_HOST=localhost\nMYSQL_HOSTNAME=db\nMYSQL_PORT=3306\nMYSQL_SOCKET=/var/run/mysqld/mysqld.sock/nPORT=3001" > .env
+                     echo -e "NODE_ENV=production\n\nMYSQL_DATABASE=epsitest\nMYSQL_USER=epsi\nMYSQL_PASSWORD=epsimysql\nMYSQL_ROOT_PASSWORD=rootepsimysql123\nMYSQL_HOST=localhost\nMYSQL_HOSTNAME=db\nMYSQL_PORT=3306\nMYSQL_SOCKET=/var/run/mysqld/mysqld.sock\nPORT=3001" > .env
                      npm install
                      exit
                     EOF
