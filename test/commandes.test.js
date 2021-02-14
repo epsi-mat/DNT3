@@ -1,16 +1,15 @@
 const puppeteer = require('puppeteer');
+require('dotenv').config();
 
 describe('Commande page Suite', () => {
-  beforeAll(async () => {
-    await page.goto('http://localhost:3000/');
-  });
-
+  const url = 'http://localhost:' + process.env.PORT;
   test('should be Index page', async () => {
+    await page.goto(url);
     await expect(page.title()).resolves.toMatch('PreudHomme');
   });
 
   test('should Commandes page ', async () => {
-    await page.goto('http://localhost:3000/commandes');
+    await page.goto(url + '/commandes');
     await expect(page.title()).resolves.toMatch('Commandes');
   });
 });
