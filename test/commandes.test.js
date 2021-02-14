@@ -17,6 +17,6 @@ describe('Commande page Suite', () => {
   test('should be Commandes page ', async () => {
     const adress = url + '/donotexist';
     await page.goto(adress);
-    await expect(page.title()).resolves.toMatch('Error');
+    await expect(page.title()).resolves.toMatch('Erreur 404');
   });
 });

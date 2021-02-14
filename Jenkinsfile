@@ -42,8 +42,14 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "Etape de déploiement"
-                sh '/var/www/dnt3/DNT3/bin/deploy.sh'
+                sh '''
+                    ssh dnt3@10.0.2.15 <<EOF
+                     cd /var/www/dnt3/DNT3
+                     git pull
+                     npm install --production
+                     exit
+                    EOF
+                '''
             }
         }
         stage('Smoke test production') {
