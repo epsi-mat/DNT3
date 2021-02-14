@@ -27,7 +27,8 @@ pipeline {
             ssh dnt3@10.0.2.15 <<EOF
              cd cd /var/www/dnt3/DNT3-test
              pm2 start bin/www
-             jest
+             jest test/unit.test.js
+             jest test/commandes.test.js
              pm2 stop bin/www
              exit
             EOF
@@ -42,7 +43,7 @@ pipeline {
         stage('Smoke test production') {
         sh '''
             ssh dnt3@10.0.2.15 <<EOF
-             jest test/smoke.test.js
+             jest /var/www/dnt3/DNT3/test/smoke.test.js
              exit
             EOF
         '''
