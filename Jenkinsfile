@@ -56,7 +56,7 @@ pipeline {
             steps {
                 sh '''
                     ssh dnt3@10.0.2.15 <<EOF
-                     jest /var/www/dnt3/DNT3/test/smoke.test.js
+                     jest /var/www/dnt3/DNT3-test/test/smoke.test.js
                      exit
                     EOF
                 '''
