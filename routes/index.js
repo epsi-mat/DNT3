@@ -19,7 +19,7 @@ module.exports = () => {
   });
 
   router.get('/error', function (req, res, next) {
-    res.render('error', { title: 'Erreur 404 ' });
+    res.render('error', { title: 'Erreur 404' });
   });
 
   router.use('/commandes', commandesRoute());

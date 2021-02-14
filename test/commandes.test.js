@@ -8,8 +8,15 @@ describe('Commande page Suite', () => {
     await expect(page.title()).resolves.toMatch('PreudHomme');
   });
 
-  test('should Commandes page ', async () => {
-    await page.goto(url + '/commandes');
+  test('should be Commandes page ', async () => {
+    const adress = url + '/commandes';
+    await page.goto(adress);
     await expect(page.title()).resolves.toMatch('Commandes');
+  });
+
+  test('should be Commandes page ', async () => {
+    const adress = url + '/donotexist';
+    await page.goto(adress);
+    await expect(page.title()).resolves.toMatch('Error');
   });
 });
