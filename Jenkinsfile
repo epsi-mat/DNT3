@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh '''
                     ssh dnt3@10.0.2.15 <<EOF
-                     cd cd /var/www/dnt3
+                     cd /var/www/dnt3
                      rm -rf DNT3-test
                      git clone https://github.com/epsi-mat/DNT3.git DNT3-test
                      cd dnt3-test
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh '''
                     ssh dnt3@10.0.2.15 <<EOF
-                     cd cd /var/www/dnt3/DNT3-test
+                     cd /var/www/dnt3/DNT3-test
                      pm2 start bin/www
                      jest test/unit.test.js
                      jest test/commandes.test.js
