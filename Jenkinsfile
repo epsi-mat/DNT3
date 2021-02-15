@@ -32,8 +32,8 @@ pipeline {
                     ssh dnt3@10.0.2.15 <<EOF
                      cd /var/www/dnt3/DNT3-test
                      pm2 start bin/www
-                     jest test/unit.test.js
-                     jest test/commandes.test.js
+                     jest test/unit.test.js --ci
+                     jest test/commandes.test.js --ci
                      pm2 stop bin/www
                      exit
                     EOF
@@ -57,7 +57,7 @@ pipeline {
                 sh '''
                     ssh dnt3@10.0.2.15 <<EOF
                      cd /var/www/dnt3/DNT3-test
-                     jest test/smoke.test.js
+                     jest test/smoke.test.js --ci
                      exit
                     EOF
                 '''
