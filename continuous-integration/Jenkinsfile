@@ -4,11 +4,21 @@ node {
         checkout scm
     }
 
-    stage("Remove App containers"){
+    stage("clone repo in Jenkins") {
+        withCredentials(usernamePassword(credentialsId: GIT_CREDS, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME'){
+        sh("""
+            git config --global credential.username {GIT_USERNAME}
+            git config --global credential.helper "!echo password={GITPASSWORD}; echo"
+            git clone https://github.com/epsi-mat/DNT3.git
+        """)
+        }
+    }
+
+    stage("Remove App containers") {
         sh "docker-compose down"
     }
 
-    stage('Run App'){
+    stage('Run App') {
         sh "docker-compose up"
         echo "App running on port 80"
     }

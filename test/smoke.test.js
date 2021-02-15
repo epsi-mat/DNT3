@@ -29,6 +29,6 @@ describe('Smoke Test Production Suite', () => {
   test('should be 404 page ', async () => {
     const adress = url + 'donotexist';
     await page.goto(adress);
-    await expect(page.title()).resolves.toMatch('Erreur 404 test');
+    await expect(page.title()).resolves.toMatch('Erreur 404');
   });
 });
