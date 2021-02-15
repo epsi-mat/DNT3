@@ -25,5 +25,17 @@ module.exports = () => {
       }
     });
   });
+  router.get('/insert', async (req, res) => {
+    const commande = function (commande) {
+      this.quantite = req.body.quantite;
+      this.id_produit = req.body.id_produit;
+    };
+    Commande.insert(commande, res);
+    res.redirect('/commandes');
+  });
+  router.get('/:id', async (req, res) => {
+    Commande.delete(req.params.id);
+    res.redirect('/commandes');
+  });
   return router;
 };

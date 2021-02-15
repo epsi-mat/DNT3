@@ -22,7 +22,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const Commande = function (commande) {
   this.id_commande = commande.id_commande;
-  this.nom_produit = commande.nom_produit;
+  this.quantite = commande.quantite;
+  this.id_produit = commande.id_produit;
   this.date_commande = commande.date_commande;
   this.date_livraison = commande.date_livraison;
 };
@@ -35,6 +36,21 @@ Commande.getAll = (result) => {
       result(null, res);
     }
   );
+};
+Commande.insert = (commande, result) => {
+  pool.query(
+    'INSERT INTO commande(date_commande,date_livraison,quantite,id_produit ) VALUES (?,?,?,?)',
+    [commande.date_commande, commande.date_livraison, commande.quantite, commande.id_produit],
+    (err, res) => {
+      if (err) throw err;
+      result(null, res);
+    }
+  );
+};
+Commande.delete = (id) => {
+  pool.query('DELETE FROM commande WHERE id_commande = ?', [id], (err) => {
+    if (err) throw err;
+  });
 };
 
 module.exports = Commande;
