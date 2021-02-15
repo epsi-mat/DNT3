@@ -6,6 +6,7 @@ const router = express.Router();
 
 module.exports = () => {
   router.get('/', async (req, res) => {
+    let editId = req.query.editCommande;
     Produit.getNomsProduits((err, products) => {
       if (err) throw err;
       else {
@@ -14,16 +15,24 @@ module.exports = () => {
           else {
             let commandes = results;
             commandes.forEach((commande) => {
-              commande.prix = prix_produit_TVA(commande.prix_hors_taxe, commande.tva, commande.quantite);
+              commande.prix = prix_produit_TVA(
+                commande.prix_hors_taxe,
+                commande.tva,
+                commande.quantite
+              );
             });
-            res.render('tables', { results: commandes, produits: products, title: 'Commandes' });
+            res.render('tables', {
+              editId,
+              results: commandes,
+              produits: products,
+              title: 'Commandes',
+            });
           }
         });
       }
     });
   });
-
-  router.get('/edit', async (req, res) => {
+  router.post('/edit', async (req, res) => {
     Commande.getAll((err, results) => {
       if (err) throw err;
       else {

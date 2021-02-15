@@ -5,13 +5,7 @@ node {
     }
 
     stage("clone repo in Jenkins") {
-        withCredentials(usernamePassword(credentialsId: GIT_CREDS, passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')) {
-        sh("""
-            git config --global credential.username {GIT_USERNAME}
-            git config --global credential.helper "!echo password={GITPASSWORD}; echo"
-            git clone https://github.com/epsi-mat/DNT3.git
-        """)
-        }
+        git url: "https://github.com/epsi-mat/DNT3.git"
     }
 
     stage("Remove App containers") {

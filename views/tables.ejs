@@ -252,11 +252,23 @@
                                             <td><%= commande.produit %></td>
                                             <td><%= commande.fournisseur %></td>
                                             <td><%= commande.date_commande.toLocaleDateString() %> </td>
-                                            <td><%= commande.date_livraison !== null ? commande.date_livraison.toLocaleDateString():"" %> </td>
+                                            <td><%= commande.date_livraison !== null ? commande.date_livraison.toLocaleDateString():"" %>
+                                                <% if (editId == commande.id_commande) { %>
+                                                    <br>
+                                                    <input type="datetime-local" id="date_livraison" name="date_livraison" >
+                                                    <script>$(document).ready( function() {
+                                                        $('#date_livraison').val(new Date().toDateInputValue());
+                                                        $('#date_livraison').attr({ "min": new Date().toDateInputValue() });
+                                                      });</script>
+                                                <% }%>
+                                            </td>
                                             <td><%= commande.prix_hors_taxe %></td>
                                             <td><%= commande.quantite %></td>
                                             <td><%= commande.prix %></td>
-                                           <td><a href='/commandes/edit' class="btn btn-warning">Editer</a>  <button type="button" class="btn btn-danger btn-supprimer" onclick="deleteCommande('<%= commande.id_produit %>')" >Supprimer</button></td>
+                                            <td>
+                                               <a href='/commandes?editCommande=<%= commande.id_commande %>' class="btn btn-warning">Editer</a>
+                                               <button type="button" class="btn btn-danger btn-supprimer" onclick="deleteCommande('<%= commande.id_produit %>')" >Supprimer</button>
+                                            </td>
                                         </tr>
                                     <% }); %>
                                     </tbody>
@@ -371,12 +383,12 @@
                 $.ajax({
                     url: route,
                     method: 'GET',
-                    dataType: 'JSON'
-                    /*success(json){
+                    dataType: 'JSON',
+                    success(json){
                         if(json){
-                            location.reload(²);
+                            location.reload();
                         }
-                    }*/
+                    }
                 });
             }
         } 
