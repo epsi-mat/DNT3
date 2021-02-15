@@ -256,7 +256,7 @@
                                             <td><%= commande.prix_hors_taxe %></td>
                                             <td><%= commande.quantite %></td>
                                             <td><%= commande.prix %></td>
-                                           <td><a href='/commandes/edit' class="btn btn-warning">Editer</a>  <button type="button" class="btn btn-danger btn-supprimer">Supprimer</button></td>
+                                           <td><a href='/commandes/edit' class="btn btn-warning">Editer</a>  <button type="button" class="btn btn-danger btn-supprimer" onclick="deleteCommande('<%= commande.id_produit %>')" >Supprimer</button></td>
                                         </tr>
                                     <% }); %>
                                     </tbody>
@@ -323,13 +323,13 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="/commandes/add" method="POST">
                     <div class="form-group">
                         <label for="produit" class="form-label" style="text-align: center;">Sélectionner votre produit</label>
                         <select class="form-control" id="produit">
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <% produits.forEach(function(produit) { %>
+                                <option value="<%= produit.id_produit %>"><%= produit.produit %></option>
+                            <% }); %>
                         </select>
                     </div>
                     <div class="form-group">
@@ -364,14 +364,22 @@
     <script src="js/demo/datatables-demo.js"></script>
 
     <script>
-        $(document).ready(function(){
-            $(".btn-supprimer").click(function(){
-                let results = window.confirm('Voulez-vraiment supprimer la commande ?')
-                if(results){ 
-                    location.reload();
-                }
-            });
-        });
+        function deleteCommande(id){
+            let results = window.confirm('Voulez-vraiment supprimer la commande ?')
+            if(results){ 
+                let route = "/commandes/"+id;
+                $.ajax({
+                    url: route,
+                    method: 'GET',
+                    dataType: 'JSON'
+                    /*success(json){
+                        if(json){
+                            location.reload(²);
+                        }
+                    }*/
+                });
+            }
+        } 
     </script>
 
 </body>

@@ -29,7 +29,7 @@ const Commande = function (commande) {
 
 Commande.getAll = (result) => {
   pool.query(
-    'SELECT c.id_commande, c.date_commande, c.date_livraison, c.quantite, p.produit, p.prix_hors_taxe, p.tva, p.fournisseur FROM commande c INNER JOIN produit p ON c.id_produit = p.id_produit',
+    'SELECT c.id_commande, c.date_commande, c.date_livraison, c.quantite, p.produit, p.prix_hors_taxe, p.tva, p.fournisseur, c.id_produit FROM commande c INNER JOIN produit p ON c.id_produit = p.id_produit',
     (err, res) => {
       if (err) throw err;
       result(null, res);

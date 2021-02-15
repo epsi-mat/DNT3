@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
-    database: process.env.DATABASE,
+    database: process.env.MYSQL_DATABASE,
     port: process.env.MYSQL_PORT,
   });
 }
@@ -28,7 +28,7 @@ const Produit = function (produit) {
 };
 
 Produit.getNomsProduits = (result) => {
-  pool.query('SELECT nom_produit FROM produit', (err, res) => {
+  pool.query('SELECT id_produit, produit FROM produit', (err, res) => {
     if (err) throw err;
     result(null, res);
   });
