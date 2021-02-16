@@ -37,13 +37,12 @@ Commande.getAll = (result) => {
     }
   );
 };
-Commande.insert = (commande, result) => {
+Commande.insert = (commande) => {
   pool.query(
-    'INSERT INTO commande(date_commande,date_livraison,quantite,id_produit ) VALUES (?,?,?,?)',
-    [commande.date_commande, commande.date_livraison, commande.quantite, commande.id_produit],
-    (err, res) => {
+    'INSERT INTO commande(quantite, id_produit ) VALUES (?,?)',
+    [commande.quantite, commande.id_produit],
+    (err) => {
       if (err) throw err;
-      result(null, res);
     }
   );
 };
@@ -51,6 +50,16 @@ Commande.delete = (id) => {
   pool.query('DELETE FROM commande WHERE id_commande = ?', [id], (err) => {
     if (err) throw err;
   });
+};
+
+Commande.updateById = (commande) => {
+  pool.query(
+    'UPDATE commande SET date_livraison = ? WHERE id_commande = ?',
+    [commande.date_livraison, commande.id_commande],
+    (err) => {
+      if (err) throw err;
+    }
+  );
 };
 
 module.exports = Commande;

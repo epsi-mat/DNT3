@@ -251,8 +251,8 @@
                                         <tr>
                                             <td><%= commande.produit %></td>
                                             <td><%= commande.fournisseur %></td>
-                                            <td><%= commande.date_commande.toLocaleDateString() %> </td>
-                                            <td><%= commande.date_livraison !== null ? commande.date_livraison.toLocaleDateString():"" %>
+                                            <td><%= commande.date_commande.toISOString().split('T')[0] %> </td>
+                                            <td><%= commande.date_livraison !== null ? commande.date_livraison.toISOString().split('T')[0]:"" %>
                                                 <% if (editId == commande.id_commande) { %>
                                                     <br>
                                                     <input type="datetime-local" id="date_livraison" name="date_livraison" >
@@ -267,7 +267,7 @@
                                             <td><%= commande.prix %></td>
                                             <td>
                                                <a href='/commandes?editCommande=<%= commande.id_commande %>' class="btn btn-warning">Editer</a>
-                                               <button type="button" class="btn btn-danger btn-supprimer" onclick="deleteCommande('<%= commande.id_produit %>')" >Supprimer</button>
+                                               <a href="/commandes?delId=<%= commande.id_commande %>" class="btn btn-danger btn-supprimer">Supprimer</a>
                                             </td>
                                         </tr>
                                     <% }); %>
@@ -338,7 +338,7 @@
                 <form action="/commandes/add" method="POST">
                     <div class="form-group">
                         <label for="produit" class="form-label" style="text-align: center;">Sélectionner votre produit</label>
-                        <select class="form-control" id="produit">
+                        <select class="form-control" id="produit" name="id_produit">
                             <% produits.forEach(function(produit) { %>
                                 <option value="<%= produit.id_produit %>"><%= produit.produit %></option>
                             <% }); %>
@@ -346,7 +346,7 @@
                     </div>
                     <div class="form-group">
                         <label for="quantite">Sélectionner la quantité</label>
-                        <input type="number" class="form-control" id="quantite" min="1" placeholder="Sélectionner la quantité">
+                        <input type="number" class="form-control" id="quantite" name="quantite" min="1" placeholder="Sélectionner la quantité">
                     </div>
                     <div class="btn-form-ajout" style="text-align: right;">
                         <button type="submit" class="btn btn-success">Commander</button>
@@ -383,7 +383,7 @@
                 $.ajax({
                     url: route,
                     method: 'GET',
-                    data: 'delId'= id,
+                    data: 'delId='+ id,
                     dataType: 'JSON',
                     success(json){
                         console.log(json);

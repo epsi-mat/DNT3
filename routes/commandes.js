@@ -7,6 +7,13 @@ const router = express.Router();
 module.exports = () => {
   router.get('/', async (req, res) => {
     let editId = req.query.editCommande;
+    let delId = req.query.delId;
+    if (typeof delId !== 'undefined' && delId) {
+      Commande.delete(delId, (err) => {
+        if (err) throw err;
+        else res.redirect('/commandes');
+      });
+    }
     Produit.getNomsProduits((err, products) => {
       if (err) throw err;
       else {
@@ -33,22 +40,23 @@ module.exports = () => {
     });
   });
   router.post('/edit', async (req, res) => {
-    Commande.getAll((err, results) => {
-      if (err) throw err;
-      else {
-        res.render('edit_commandes', { results: results, title: 'Editer Produit' });
-      }
+    const commande = new Commande({
+      id_commande: req.body.id_commande,
+      date_livraison: req.body.date_livraison,
     });
-  });
-  router.get('/insert', async (req, res) => {
-    const commande = function (commande) {
-      this.quantite = req.body.quantite;
-      this.id_produit = req.body.id_produit;
-    };
-    Commande.insert(commande, res);
+    Commande.updateById(commande);
     res.redirect('/commandes');
   });
-  router.get('/:id', async (req, res) => {
+  router.post('/add', async (req, res) => {
+    const commande = new Commande({
+      quantite: req.body.quantite,
+      id_produit: req.body.id_produit,
+    });
+    Commande.insert(commande);
+    res.redirect('/commandes');
+  });
+  router.get('/:idcommande', async (req, res) => {
+    console.log(req.params.id_commande);
     Commande.delete(req.params.id);
     res.redirect('/commandes');
   });
