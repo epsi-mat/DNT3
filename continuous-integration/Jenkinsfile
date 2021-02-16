@@ -1,20 +1,4 @@
 node {
-
-    stage('Checkout') {
-        checkout scm
-    }
-
-    stage("clone repo in Jenkins") {
-        git url: "https://github.com/epsi-mat/DNT3.git"
-    }
-
-    stage("Remove App containers") {
-        sh "docker-compose down"
-    }
-
-    stage('Run App') {
-        sh "docker-compose up"
-        echo "App running on port 80"
-    }
-
+    git url: "https://github.com/epsi-mat/DNT3.git", branch: 'integration'
+    sh "docker-compose restart"
 }
