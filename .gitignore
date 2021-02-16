@@ -8,3 +8,4 @@ package-lock.json
 .scannerwork/.sonar_lock
 .env
 sqlscripts/commande.sql
+.scannerwork/
