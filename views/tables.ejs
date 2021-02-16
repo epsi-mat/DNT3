@@ -383,8 +383,10 @@
                 $.ajax({
                     url: route,
                     method: 'GET',
+                    data: 'delId'= id,
                     dataType: 'JSON',
                     success(json){
+                        console.log(json);
                         if(json){
                             location.reload();
                         }
