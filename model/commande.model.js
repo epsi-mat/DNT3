@@ -43,12 +43,14 @@ Commande.insert = (commande) => {
     [commande.quantite, commande.id_produit],
     (err) => {
       if (err) throw err;
+      return commande.id_produit;
     }
   );
 };
 Commande.delete = (id) => {
   pool.query('DELETE FROM commande WHERE id_commande = ?', [id], (err) => {
     if (err) throw err;
+    return id;
   });
 };
 
@@ -58,6 +60,7 @@ Commande.updateById = (commande) => {
     [commande.date_livraison, commande.id_commande],
     (err) => {
       if (err) throw err;
+      return commande.id_commande;
     }
   );
 };

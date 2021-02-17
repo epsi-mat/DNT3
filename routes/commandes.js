@@ -9,10 +9,8 @@ module.exports = () => {
     let editId = req.query.editCommande;
     let delId = req.query.delId;
     if (typeof delId !== 'undefined' && delId) {
-      Commande.delete(delId, (err) => {
-        if (err) throw err;
-        else res.redirect('/commandes');
-      });
+      Commande.delete(delId);
+      res.redirect('/commandes');
     }
     Produit.getNomsProduits((err, products) => {
       if (err) throw err;
