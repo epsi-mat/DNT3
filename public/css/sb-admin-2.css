@@ -11246,6 +11246,9 @@ body.sidebar-toggled footer.sticky-footer {
 .logo_accueil {
   width: 230px !important;
 }
+body.sidebar-toggled .logo_accueil {
+  content:url("/img/preudhomme_logo_tiny.png");
+}
 .sidebar-brand.d-flex.align-items-center.justify-content-center {
   margin: 15px 0 15px 0 !important;
 }
